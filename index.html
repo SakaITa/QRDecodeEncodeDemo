@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest"></script>
+        <script type="text/javascript" src="https://unpkg.com/@zxing/browser@latest"></script>
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            // 読取り
+            document.getElementById('read').addEventListener('click', async function(e) {
+                const image = document.getElementById('image');
+                const decodeText = document.getElementById('read-text');
+
+                const reader = new ZXing.BrowserQRCodeReader();
+                
+                try {
+                    const result = await reader.decodeFromImage(image);
+                    decodeText.innerText = result.text;
+                } catch(error) {
+                    console.error(error);
+                }
+            });
+
+            // 生成
+            document.getElementById('write').addEventListener('click', function(e) {
+                const writeSvg = document.getElementById('write-svg');
+                
+                const writer = new ZXing.BrowserQRCodeSvgWriter();
+                const svg = writer.write('https://sakaf.net', 256, 256);
+
+                writeSvg.appendChild(svg);
+            });
+        });
+        </script>
+    </head>
+    <body> 
+        <h2>Read demo</h2>
+        <div><img id="image" src="image.png" /></div>
+        <div><button id="read">read</button></div>
+        <div id="read-text"></div>
+
+        <h2>Write demo</h2>
+        <div>https://sakaf.net</div>
+        <button id="write">write</button>
+        <div id="write-svg"></div>
+    </body>
+</html>
