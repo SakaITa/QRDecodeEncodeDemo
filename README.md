@@ -4,5 +4,5 @@ github pages にデプロイしています。
 https://sakaita.github.io/QRReadWriteDemo/
 
 
-解説については下記のページをご確認ください。
+解説については下記のページをご確認ください。  
 https://sakaf.net/posts/qr-read-write/
